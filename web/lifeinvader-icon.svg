@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LifeInvader">
+  <defs>
+    <linearGradient id="li-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3b30"/>
+      <stop offset="100%" stop-color="#c41230"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#li-bg)"/>
+  <text x="32" y="43" text-anchor="middle" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="26" font-weight="900">Li</text>
+</svg>

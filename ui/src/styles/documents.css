@@ -1,0 +1,804 @@
+/* Documents app */
+
+.documents-app.phone-app {
+  --doc-accent: #7ee8ca;
+  isolation: isolate;
+}
+
+.documents-app .phone-app-content {
+  overflow-x: hidden;
+}
+
+/* In-phone date picker (replaces native input[type=date]) */
+.doc-date-field {
+  position: relative;
+  width: 100%;
+}
+
+.doc-date-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.doc-date-trigger .placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.doc-date-trigger:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.doc-date-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.doc-date-calendar {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--app-border);
+  background: #0d1520;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.doc-date-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.doc-date-month-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.doc-date-nav {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.doc-date-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.doc-date-weekdays span {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.doc-date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.doc-date-day {
+  aspect-ratio: 1;
+  min-height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-date-day.empty {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.doc-date-day.today {
+  border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+.doc-date-day.selected {
+  background: #7ee8ca;
+  color: #fff;
+}
+
+.doc-date-day:not(.empty):active {
+  background: rgba(59, 130, 246, 0.35);
+}
+
+.doc-date-calendar-footer {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--app-border);
+}
+
+.doc-date-footer-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-date-footer-btn.primary {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: #93c5fd;
+}
+
+.doc-list-item-static {
+  flex: 1;
+  margin-bottom: 0;
+  cursor: default;
+}
+
+.doc-list-item-static:active {
+  background: var(--app-surface);
+}
+
+.documents-app-modal-open .phone-app-content {
+  overflow: hidden;
+}
+
+.documents-app-modal-open .phone-app-subtabs {
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.doc-send-panel .trading-symbol-badge.doc-send-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+  font-size: 0;
+}
+
+.doc-status-banner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.doc-status-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.doc-status-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.doc-status-pill.muted {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.doc-status-signed .doc-status-label {
+  color: #34c759;
+}
+
+.doc-list-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.doc-list-title-row h3 {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-list-title-row .phone-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  padding: 3px 7px;
+}
+
+.doc-send-targets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.doc-send-target {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.doc-send-target.active {
+  border-color: rgba(59, 130, 246, 0.55);
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.doc-send-target-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.doc-send-target-meta {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.doc-editor-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding-bottom: 8px;
+}
+
+.doc-editor-actions-footer {
+  margin-top: 0;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--app-border);
+  background: var(--app-bg);
+}
+
+.doc-editor-actions .phone-btn-green {
+  width: 100%;
+}
+
+.doc-editor-secondary {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.doc-header-add {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.doc-header-add:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.doc-search-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.doc-search {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+}
+
+.doc-search::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.doc-search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.doc-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-filter-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.doc-filter-meta svg.open {
+  transform: rotate(180deg);
+}
+
+.doc-filter-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: -6px 0 12px;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.doc-filter-menu button {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-filter-menu button.active,
+.doc-filter-menu button:active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.doc-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  background: var(--app-surface);
+  color: inherit;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  position: relative;
+}
+
+.doc-list-item.unread {
+  border-color: rgba(96, 165, 250, 0.35);
+}
+
+.doc-list-item:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.doc-list-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.doc-list-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-list-body h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.doc-list-body p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.doc-unread-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7ee8ca;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.doc-template-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.doc-template-row .doc-list-item {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.doc-use-template-btn {
+  flex-shrink: 0;
+  align-self: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-editor-form .phone-form-group label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.doc-hint {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 14px;
+  line-height: 1.45;
+}
+
+.doc-fields-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 10px;
+}
+
+.doc-add-field-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-field-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.doc-field-row input,
+.doc-field-row select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.doc-field-required {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.doc-field-remove {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 69, 58, 0.15);
+  color: #ff6b6b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.doc-toggle {
+  width: 48px;
+  height: 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.doc-toggle.on {
+  background: rgba(59, 130, 246, 0.45);
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+.doc-toggle-thumb {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+
+.doc-toggle.on .doc-toggle-thumb {
+  transform: translateX(20px);
+}
+
+.doc-icon-select {
+  position: relative;
+}
+
+.doc-icon-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.doc-icon-select-btn span {
+  flex: 1;
+  text-align: left;
+}
+
+.doc-icon-select-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 20;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: #0d1520;
+  padding: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.doc-icon-select-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.doc-icon-select-menu button:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.doc-rich-editor {
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--app-surface);
+}
+
+.doc-rich-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.doc-rich-toolbar button {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-rich-toolbar button:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.doc-rich-area {
+  min-height: 140px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  outline: none;
+}
+
+.doc-rich-area:empty::before {
+  content: attr(data-placeholder);
+  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.doc-preview-panel {
+  padding-bottom: 16px;
+}
+
+.doc-preview-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.doc-preview-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-preview-fields-list {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.doc-preview-content-box {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--app-border);
+  background: rgba(0, 0, 0, 0.25);
+  min-height: 120px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.doc-preview-empty {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+}
+
+.doc-rich-preview h1,
+.doc-rich-preview h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.doc-rich-preview p {
+  margin: 0 0 8px;
+}
+
+.doc-rich-preview ul,
+.doc-rich-preview ol {
+  margin: 0 0 8px;
+  padding-left: 20px;
+}

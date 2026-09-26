@@ -1,0 +1,77 @@
+.lockscreen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+  color: #fff;
+  cursor: default;
+}
+
+.lockscreen.unlocking {
+  animation: unlockAnimation 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes unlockAnimation {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.1) translateY(-50px);
+  }
+}
+
+.lockscreen-time {
+  font-size: 96px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -4px;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.lockscreen-date {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 40px;
+}
+
+.home-indicator {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: none;
+  padding: 0;
+}
+
+.home-indicator.unlock {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-indicator.unlock:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.home-indicator.unlock:active {
+  background: #fff;
+  transform: translateX(-50%) scale(0.95);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+}

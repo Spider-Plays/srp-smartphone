@@ -1,0 +1,80 @@
+@import './spider-theme.css';
+
+:root {
+  --bg: #000000;
+  --surface: #0a0f18;
+  --surface-2: #060910;
+  --surface-3: #0a0f18;
+  --border: rgba(255, 255, 255, 0.07);
+  --text: #d9d9d9;
+  --text-muted: #7a87a4;
+  --text-dim: #7a87a4;
+  --green: var(--spider-accent);
+  --green-dark: #4eb89a;
+  --green-btn: #3d9a82;
+  --phone-accent: var(--spider-accent);
+  --phone-accent-strong: var(--spider-accent-strong);
+  --phone-accent-muted: var(--spider-accent-muted);
+  --blue: var(--spider-accent);
+  --red: #ef4444;
+  --pink: #f91880;
+  --app-bg: #050a12;
+  --phone-w: 360px;
+  --phone-h: 780px;
+  --frame-bezel: 3.5px;
+  --frame-rim: 3px;
+  --frame-radius-outer: 10px;
+  --frame-radius-inner: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --font: 'Saira', 'Inter', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  color: inherit;
+}
+
+input,
+textarea {
+  color: var(--text);
+}
+
+.hidden {
+  display: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 4px;
+}

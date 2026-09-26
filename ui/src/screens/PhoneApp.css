@@ -1,0 +1,104 @@
+.phone-tabs .tab {
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.keypad-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px 20px;
+}
+
+.dial-display {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  flex: 1;
+  align-content: center;
+}
+
+.dial-key {
+  aspect-ratio: 1;
+  max-height: 56px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-size: 22px;
+  font-weight: 500;
+  transition: background 0.15s, transform 0.1s;
+}
+.dial-key:active {
+  background: var(--surface-3);
+  transform: scale(0.95);
+}
+
+.dial-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin-top: 12px;
+}
+
+.dial-clear {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #3d1f1f;
+  color: #f87171;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial-call {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.call-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 12px;
+  padding: 12px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.call-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+.icon-in { color: var(--green); }
+.icon-out { color: var(--blue); }
+.icon-missed { color: var(--red); }
+.call-time {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}

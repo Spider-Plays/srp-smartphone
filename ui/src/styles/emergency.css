@@ -1,0 +1,216 @@
+/* Emergency app — domain-specific UI (shell: app-shell.css) */
+
+/* Emergency lines */
+.emergency-line-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.emergency-line-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.emergency-line-icon.police {
+  background: rgba(59, 130, 246, 0.15);
+  color: #7ee8ca;
+}
+
+.emergency-line-icon.medical {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.emergency-line-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.emergency-line-number {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+}
+
+.emergency-line-type {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 2px;
+}
+
+.emergency-call-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter 0.15s, transform 0.15s;
+}
+
+.emergency-call-btn:active {
+  transform: scale(0.94);
+  filter: brightness(1.15);
+}
+
+.emergency-call-btn.police {
+  background: rgba(59, 130, 246, 0.2);
+  color: #7ee8ca;
+}
+
+.emergency-call-btn.medical {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.emergency-message-card {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.emergency-message-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 16px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+}
+
+.emergency-message-input::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.emergency-message-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.emergency-dispatch-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.emergency-send-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.emergency-send-btn:active:not(:disabled) {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.emergency-send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.emergency-lawyer-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.emergency-lawyer-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.emergency-online-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+}
+
+.emergency-specialty-tag {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(127, 29, 29, 0.55);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.emergency-lawyer-actions {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.emergency-action-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+
+.emergency-action-btn:active {
+  color: #fff;
+}
+
+.emergency-empty-inline {
+  text-align: left;
+  padding: 8px 0 24px;
+}
+
+.emergency-section-block {
+  margin-bottom: 24px;
+}
+
+.emergency-section-block .emergency-section-label {
+  margin-top: 0;
+}
+
+.emergency-section-block .emergency-empty {
+  padding: 8px 0 0;
+  text-align: left;
+}

@@ -1,0 +1,528 @@
+/* Camera app — immersive viewfinder + floating controls */
+
+.camera-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.camera-viewfinder {
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.camera-viewfinder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+  z-index: 2;
+}
+
+.camera-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-focus-frame {
+  position: absolute;
+  inset: 18% 14%;
+  pointer-events: none;
+  z-index: 3;
+  border: none;
+  box-shadow: none;
+}
+
+.camera-focus-frame::before,
+.camera-focus-frame::after,
+.camera-focus-corner::before,
+.camera-focus-corner::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: rgba(255, 255, 255, 0.55);
+  border-style: solid;
+}
+
+.camera-focus-frame::before {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+  border-radius: 2px 0 0 0;
+}
+
+.camera-focus-frame::after {
+  top: 0;
+  right: 0;
+  border-width: 2px 2px 0 0;
+  border-radius: 0 2px 0 0;
+}
+
+.camera-focus-corner {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.camera-focus-corner::before {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 2px 2px;
+  border-radius: 0 0 0 2px;
+}
+
+.camera-focus-corner::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 2px 0;
+}
+
+.camera-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  background: #fff;
+  animation: camera-flash 0.28s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes camera-flash {
+  0% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.camera-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.72);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.02em;
+}
+
+.camera-loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: camera-spin 0.75s linear infinite;
+}
+
+@keyframes camera-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.camera-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  pointer-events: none;
+}
+
+.camera-overlay > * {
+  pointer-events: auto;
+}
+
+.camera-overlay--top {
+  top: 0;
+  padding-top: 6px;
+}
+
+.camera-overlay--bottom {
+  bottom: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  padding-bottom: 18px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.82) 100%);
+}
+
+.camera-icon-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.camera-icon-btn:active {
+  transform: scale(0.94);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.camera-mode-switch {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.camera-mode-btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.65);
+  background: transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.camera-mode-btn.is-active {
+  color: #111;
+  background: #f5c518;
+}
+
+.camera-recording-badge {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: rgba(220, 38, 38, 0.88);
+  pointer-events: none;
+}
+
+.camera-recording-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  animation: camera-rec-pulse 1s ease-in-out infinite;
+}
+
+@keyframes camera-rec-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.camera-lens-badge {
+  min-width: 40px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.camera-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.02em;
+}
+
+/* iPhone-style 0.5× / 1× / 2× lens picker */
+.camera-zoom-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  align-self: center;
+  margin: 10px auto 12px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(22, 22, 24, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.camera-zoom-btn {
+  min-width: 40px;
+  height: 34px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.12s ease;
+}
+
+.camera-zoom-btn.is-active {
+  color: #f5c518;
+  background: rgba(48, 48, 52, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.camera-zoom-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.camera-zoom-btn:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.camera-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.camera-tool-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.camera-tool-btn:active {
+  transform: scale(0.92);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.camera-gallery-btn {
+  width: 48px;
+  height: 48px;
+  padding: 3px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: rgba(30, 30, 30, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.camera-gallery-btn:active {
+  transform: scale(0.94);
+  border-color: #fff;
+}
+
+.camera-shutter-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-shutter {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  transition: transform 0.12s ease;
+}
+
+.camera-shutter:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.camera-shutter-inner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+.camera-shutter.is-capturing .camera-shutter-inner {
+  transform: scale(0.88);
+  opacity: 0.7;
+}
+
+.camera-shutter--video .camera-shutter-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.camera-shutter--video.is-recording {
+  border-color: #ff3b30;
+}
+
+.camera-shutter--video.is-recording .camera-shutter-inner {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #ff3b30;
+}
+
+.camera-shutter:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.camera-review-video {
+  background: #000;
+}
+
+/* Review overlay — keep live viewfinder canvas mounted underneath (retake fix) */
+.camera-review {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  pointer-events: auto;
+}
+
+.camera-review-image {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  object-fit: contain;
+  background: #000;
+}
+
+.camera-review-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-start;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+}
+
+.camera-review-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px 22px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+}
+
+.camera-review-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.camera-review-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.camera-review-btn:disabled {
+  opacity: 0.5;
+}
+
+.camera-review-btn--retake {
+  background: transparent;
+  padding-left: 4px;
+}
+
+.camera-review-btn--save {
+  margin-left: auto;
+  padding: 12px 22px;
+  background: #f5c518;
+  color: #111;
+  box-shadow: 0 4px 20px rgba(245, 197, 24, 0.35);
+}
+
+.camera-review-btn--save:disabled {
+  background: rgba(245, 197, 24, 0.45);
+  color: rgba(0, 0, 0, 0.5);
+}

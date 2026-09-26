@@ -1,0 +1,996 @@
+/* Gallery app — iOS Photos-inspired library + immersive viewer */
+
+.gallery-app.glry-app {
+  background: var(--app-bg, #050a12);
+  animation: none;
+}
+
+.gallery-app.glry-app .phone-app-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.glry-library-shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Library scroll area */
+.glry-library {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 0 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.glry-toolbar-btn,
+.glry-confirm-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.glry-toolbar-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.glry-toolbar-btn:active {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(0.94);
+}
+
+.glry-confirm-btn {
+  background: linear-gradient(135deg, #34c759, #30b350);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(52, 199, 89, 0.35);
+}
+
+.glry-confirm-btn:active {
+  transform: scale(0.94);
+}
+
+.glry-library::-webkit-scrollbar {
+  display: none;
+}
+
+.glry-library.is-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Date sections */
+.glry-section {
+  margin-bottom: 16px;
+}
+
+.glry-section:first-of-type {
+  margin-top: 0;
+}
+
+.glry-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 20px 8px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--app-bg, #050a12);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.glry-section:first-of-type .glry-section-header {
+  padding-top: 4px;
+}
+
+.glry-section-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #fff;
+}
+
+.glry-section-header span {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Photo grid */
+.glry-grid {
+  display: grid;
+  gap: 2px;
+  padding: 0 2px;
+}
+
+.glry-tile {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.glry-tile-media,
+.glry-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease, opacity 0.2s;
+}
+
+.glry-tile:active .glry-tile-media,
+.glry-tile:active img {
+  transform: scale(1.04);
+  opacity: 0.88;
+}
+
+.glry-tile.is-selected .glry-tile-media,
+.glry-tile.is-selected img {
+  opacity: 0.72;
+}
+
+.glry-tile-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  pointer-events: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.glry-viewer-video {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: #000;
+}
+
+.glry-tile-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.15s, border-color 0.15s, transform 0.2s;
+}
+
+.glry-tile-check.is-on {
+  background: #34c759;
+  border-color: #34c759;
+  transform: scale(1.05);
+}
+
+/* Empty & loading states */
+.glry-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 28px;
+  min-height: 60%;
+}
+
+.glry-empty-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 20px;
+}
+
+.glry-empty-icon.glry-shimmer {
+  animation: glryPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes glryPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.glry-empty-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.glry-empty-text {
+  margin: 0 0 24px;
+  max-width: 240px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.glry-empty p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.glry-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff2d55, #ff375f);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 45, 85, 0.28);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.glry-empty-cta:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 14px rgba(255, 45, 85, 0.22);
+}
+
+/* Selection bar (attach mode) */
+.glry-selection-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(12, 18, 28, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.glry-selection-preview {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glry-selection-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.glry-selection-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.glry-selection-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.glry-selection-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glry-selection-use {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #34c759;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.glry-selection-use:active {
+  transform: scale(0.96);
+  background: #2fb350;
+}
+
+/* Full-screen viewer */
+.glry-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  animation: glryViewerIn 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes glryViewerIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.glry-viewer-chrome {
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
+}
+
+.glry-viewer-chrome.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.glry-viewer-top {
+  display: grid;
+  grid-template-columns: 38px 1fr 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent);
+}
+
+.glry-viewer-close {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.glry-viewer-close:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0.94);
+}
+
+.glry-viewer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.glry-viewer-counter {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.glry-viewer-time {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.glry-viewer-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 4px;
+}
+
+.glry-viewer-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  animation: glryImageIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  user-select: none;
+}
+
+@keyframes glryImageIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.glry-viewer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background 0.15s, transform 0.15s;
+  z-index: 2;
+}
+
+.glry-viewer-nav:active {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-50%) scale(0.94);
+}
+
+.glry-viewer-nav-prev {
+  left: 10px;
+}
+
+.glry-viewer-nav-next {
+  right: 10px;
+}
+
+.glry-viewer-bottom {
+  padding: 16px 20px 24px;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+}
+
+.glry-viewer-label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.gallery-app.glry-app:has(.glry-selection-bar) .glry-library,
+.gallery-app.glry-app:has(.glry-manage-bar) .glry-library {
+  padding-bottom: 8px;
+}
+
+.glry-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.glry-toolbar-btn-danger {
+  background: rgba(255, 69, 58, 0.15);
+  color: #ff453a;
+}
+
+.glry-toolbar-btn-danger:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.glry-toolbar-btn-danger:not(:disabled):active {
+  background: rgba(255, 69, 58, 0.28);
+}
+
+/* Search — fixed above scroll area so date headers stick flush at top: 0 */
+.glry-search-bar {
+  flex-shrink: 0;
+  padding: 8px 16px 6px;
+  background: var(--app-bg, #050a12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 3;
+}
+
+.glry-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glry-search-icon {
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.glry-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+.glry-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.glry-search-clear {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Manage bar */
+.glry-manage-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(12, 18, 28, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glry-manage-bar span {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.glry-manage-cancel,
+.glry-manage-delete {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.glry-manage-cancel {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.glry-manage-delete {
+  background: #ff453a;
+  color: #fff;
+}
+
+.glry-manage-delete:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Viewer more button */
+.glry-viewer-meta {
+  align-items: center;
+  text-align: center;
+}
+
+.glry-viewer-more {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  justify-self: end;
+}
+
+.glry-viewer-more:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0.94);
+}
+
+/* Action sheet */
+.glry-sheet-root,
+.glry-dialog-root {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.glry-dialog-root {
+  align-items: center;
+  padding: 20px;
+}
+
+.glry-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+
+.glry-sheet {
+  position: relative;
+  width: 100%;
+  max-height: 78%;
+  background: #121a28;
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 0 24px;
+  animation: glrySheetUp 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+@keyframes glrySheetUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.glry-sheet-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 4px auto 12px;
+}
+
+.glry-sheet-header,
+.glry-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px 12px;
+}
+
+.glry-sheet-header h3,
+.glry-dialog h3,
+.glry-dialog-confirm h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glry-sheet-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.glry-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+}
+
+.glry-sheet-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.glry-sheet-action:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.glry-sheet-action-danger {
+  color: #ff453a;
+}
+
+.glry-sheet-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 20px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+}
+
+.glry-sheet-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Dialogs */
+.glry-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background: #121a28;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  animation: glryDialogIn 0.22s ease;
+}
+
+@keyframes glryDialogIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.glry-dialog-confirm p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.glry-dialog-input {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+.glry-dialog-input:focus {
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+.glry-dialog-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.glry-dialog-btn {
+  flex: 1;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.glry-dialog-btn-muted {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.glry-dialog-btn-primary {
+  background: #7ee8ca;
+  color: #fff;
+}
+
+.glry-dialog-btn-danger {
+  background: #ff453a;
+  color: #fff;
+}
+
+.glry-dialog-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.glry-dialog-import .glry-import-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.glry-import-label {
+  display: block;
+  margin: 12px 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.glry-import-label:first-of-type {
+  margin-top: 0;
+}
+
+.glry-import-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.glry-import-error {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #ff453a;
+}
+
+.glry-empty-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.glry-empty-cta-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glry-empty-cta-secondary:active {
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Pinch / double-tap zoom */
+.glry-zoom-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.glry-zoom-wrap .glry-viewer-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+}
+
+/* Nearby share */
+.glry-nearby-hint {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.glry-nearby-status {
+  padding: 16px 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 14px;
+}
+
+.glry-nearby-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.glry-nearby-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.glry-nearby-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(10, 132, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.glry-nearby-name {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.glry-nearby-dist {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}

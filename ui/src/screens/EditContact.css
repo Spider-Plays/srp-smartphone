@@ -1,0 +1,71 @@
+.edit-contact {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.edit-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 36px 16px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.edit-header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+  flex: 1;
+  margin-left: 8px;
+}
+
+.save-pill {
+  width: 56px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  margin: 24px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.edit-form {
+  padding: 0 20px;
+  flex: 1;
+}
+
+.field-input.note {
+  resize: none;
+  min-height: 100px;
+}
+
+.delete-contact {
+  margin: 16px 20px 0;
+  width: calc(100% - 40px);
+  padding: 14px;
+  border-radius: 999px;
+  background: #2a1515;
+  border: 1px solid #7f1d1d;
+  color: var(--red);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

@@ -1,0 +1,602 @@
+/* Properties app — uses unified app-shell tokens */
+
+.properties-app {
+  --props-accent: var(--spider-accent);
+  --props-accent-strong: var(--spider-accent-strong);
+  --props-accent-muted: var(--spider-accent-muted);
+  --props-accent-border: var(--spider-accent-border);
+}
+
+.properties-app .phone-app-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.properties-app .phone-app-footer {
+  padding: 0 20px 12px;
+}
+
+/* Header icon buttons — same as phone-app-back */
+.properties-app .props-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Filter / view controls — match phone-app-subtabs */
+.props-view-toggle,
+.props-filters-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+  padding: 4px;
+  background: var(--app-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+.props-filters-row {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 6px;
+}
+
+.props-filters-row::-webkit-scrollbar {
+  display: none;
+}
+
+.props-view-toggle button,
+.props-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: none;
+  color: var(--app-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.props-view-toggle button {
+  flex: 1;
+}
+
+.props-view-toggle button.active,
+.props-chip.active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+.props-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--props-accent);
+}
+
+.props-sort {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.props-sort select {
+  appearance: none;
+  padding: 8px 26px 8px 10px;
+  border-radius: 14px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 8px center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Map */
+.props-map-wrap {
+  flex: 1;
+  min-height: 220px;
+  position: relative;
+  margin: 0 -20px;
+  overflow: hidden;
+}
+
+.props-map-canvas {
+  position: absolute;
+  inset: 0;
+  background: #0a1018;
+}
+
+.props-map-tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--map-grid, 3), 1fr);
+  grid-template-rows: repeat(var(--map-grid, 3), 1fr);
+  z-index: 0;
+}
+
+.props-map-tile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.props-map-canvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(5, 10, 18, 0.08) 0%, rgba(5, 10, 18, 0.22) 100%);
+}
+
+.props-map-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: var(--props-accent-strong);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  transition: transform 0.15s;
+}
+
+.props-map-marker:active {
+  transform: translate(-50%, -50%) scale(0.94);
+}
+
+.props-map-marker--fav {
+  background: #fff;
+  color: var(--props-accent-strong);
+}
+
+/* Cards — app-shell list pattern */
+.props-listings,
+.props-agents-list {
+  flex: 1;
+  min-height: 0;
+}
+
+.props-listing-card,
+.props-agent-card,
+.props-place-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.props-listing-card {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.props-listing-card:active,
+.props-agent-card:active,
+.props-place-card:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.props-listing-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.props-listing-top h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.props-listing-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--props-accent);
+  white-space: nowrap;
+}
+
+.props-listing-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--app-text-muted);
+}
+
+.props-listing-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.props-tag {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.props-tag--buy {
+  background: var(--props-accent-muted);
+  color: var(--props-accent);
+}
+
+.props-tag--rent {
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
+}
+
+.props-tag--cat {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--app-text-muted);
+}
+
+/* Agents */
+.props-agent-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.75);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.props-agent-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.props-agent-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.props-agent-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-bottom: 4px;
+}
+
+.props-agent-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.props-role-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.props-role-tag--agent {
+  color: var(--props-accent);
+}
+
+.props-role-tag--broker {
+  color: #c4b5fd;
+}
+
+.props-company-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--props-accent-border);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.props-company-badge span:first-child {
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--props-accent);
+}
+
+.props-agent-stats {
+  font-size: 12px;
+  color: var(--app-text-muted);
+}
+
+.props-agent-stats strong {
+  color: var(--props-accent);
+  font-weight: 700;
+}
+
+/* Detail views */
+.props-agent-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.props-agent-profile .props-agent-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.props-agent-subtitle {
+  font-size: 14px;
+  color: var(--app-text-muted);
+  margin-top: 2px;
+}
+
+.props-agent-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.props-agent-phone svg {
+  color: var(--props-accent);
+}
+
+.props-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 16px 8px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+}
+
+.props-stat {
+  text-align: center;
+  position: relative;
+}
+
+.props-stat + .props-stat::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: var(--app-border);
+}
+
+.props-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--app-text-muted);
+  margin-bottom: 6px;
+}
+
+.props-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.props-stat-value--accent {
+  color: var(--props-accent);
+}
+
+.props-detail-hero {
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+}
+
+.props-detail-price {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--props-accent);
+  letter-spacing: -0.5px;
+  margin: 8px 0;
+}
+
+.props-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.props-detail-stat {
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.props-detail-stat span {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--app-text-muted);
+  margin-bottom: 4px;
+}
+
+.props-detail-stat strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.props-fav-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--app-border);
+  background: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.props-fav-btn.active {
+  border-color: var(--props-accent-border);
+  color: var(--props-accent);
+}
+
+.props-place-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--props-accent-muted);
+  color: var(--props-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.props-place-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.props-place-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.props-place-address {
+  font-size: 12px;
+  color: var(--app-text-muted);
+  margin-top: 2px;
+}
+
+.props-primary-btn {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(88, 86, 214, 0.85);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: filter 0.15s, background 0.15s;
+}
+
+.props-primary-btn:active:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.props-primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.properties-app .props-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--app-text-muted);
+  font-size: 14px;
+  min-height: 160px;
+}
+
+.properties-app .props-empty-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 16px;
+  min-height: 220px;
+  color: var(--app-text-muted);
+}
+
+.properties-app .props-empty-center svg {
+  opacity: 0.35;
+  margin-bottom: 12px;
+  color: var(--props-accent);
+}
+
+.properties-app .props-empty-center h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.2px;
+}
+
+.properties-app .props-empty-center p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  max-width: 260px;
+}

@@ -1,0 +1,248 @@
+/* Unfolded inner display — two screens, no center seam */
+
+.screen-content.is-fold-split {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.screen-content.is-fold-span {
+  position: relative;
+}
+
+.fold-pane,
+.fold-split-pane {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.fold-split {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.phone-app-fold > .fold-split,
+.fold-split-pane > .phone-app,
+.fold-pane > .screen-layer,
+.fold-split-pane > .mail-app,
+.fold-split-pane > .news-app,
+.fold-split-pane > .cyber-settings {
+  flex: 1;
+  min-height: 0;
+}
+
+.fold-hinge-gap {
+  display: none;
+}
+
+.phone.is-flipped .phone-hinge {
+  display: none;
+}
+
+.phone.is-flipped .frame-earpiece {
+  opacity: 0;
+}
+
+.phone.is-flipped:has(.is-fold-full) .phone-hinge {
+  opacity: 0;
+}
+
+.fold-empty {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.fold-empty-mark {
+  width: 46px;
+  height: 28px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  background:
+    linear-gradient(90deg, transparent 46%, rgba(255, 255, 255, 0.45) 46%, rgba(255, 255, 255, 0.45) 54%, transparent 54%),
+    rgba(255, 255, 255, 0.04);
+}
+
+.fold-empty-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+
+.fold-empty-subtitle {
+  margin: 0;
+  max-width: 220px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.46);
+}
+
+/* Tab menus become the left screen; the section fills the right screen */
+.phone-app-fold {
+  background: var(--app-bg);
+}
+
+.phone-app-nav-fold {
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 4px;
+  margin: 4px 12px 18px;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.phone-app-nav-fold .phone-app-nav-item {
+  flex: 0 0 auto;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.phone-app-nav-fold .phone-app-nav-item span {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.phone-app-nav-fold .phone-app-nav-item.active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fold-split-pane > .phone-app-content,
+.phone-app-fold .fold-split-pane .phone-app-content {
+  flex: 1;
+  min-height: 0;
+}
+
+.conversation-item.is-active,
+.vehicle-card.is-active,
+.mail-row.is-active,
+.loans-loan-row.is-active,
+.cyber-settings-menu-row.is-active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.notes-card.is-active {
+  outline: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+/* News, gallery: list stays on the left, the thing you open covers the right */
+.phone.is-flipped .is-fold-span .news-app.news-fold > :not(.news-detail):not(.fold-detail-dock) {
+  width: 50%;
+  max-width: 50%;
+  align-self: flex-start;
+}
+
+.phone.is-flipped .is-fold-span .news-app.news-fold > .news-content {
+  align-self: stretch;
+  flex: 1;
+}
+
+.phone.is-flipped .is-fold-span .news-app.news-fold .news-detail,
+.phone.is-flipped .is-fold-span .fold-detail-dock {
+  left: 50%;
+}
+
+.fold-detail-dock {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #050a12;
+}
+
+.fold-detail-dock > .phone-app,
+.fold-detail-dock > .news-app {
+  position: relative;
+  inset: auto;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.phone.is-flipped .is-fold-span .gallery-app > .phone-app-header,
+.phone.is-flipped .is-fold-span .gallery-app > .phone-app-content {
+  width: 50%;
+  max-width: 50%;
+}
+
+.phone.is-flipped .is-fold-span .gallery-app .glry-viewer {
+  left: 50%;
+  animation: none;
+}
+
+/* Chirp menu on the left, timeline or post on the right */
+.phone.is-flipped .is-fold-span .chirp-app:has(> .phone-app-nav) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  column-gap: 0;
+}
+
+.phone.is-flipped .is-fold-span .chirp-app:has(> .phone-app-nav) > .chirp-x-header {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.phone.is-flipped .is-fold-span .chirp-app:has(> .phone-app-nav) > .phone-app-nav {
+  grid-column: 1;
+  grid-row: 2;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  align-self: stretch;
+  height: auto;
+  margin: 4px 0 16px 12px;
+  padding: 8px;
+}
+
+.phone.is-flipped .is-fold-span .chirp-app:has(> .phone-app-nav) > .phone-app-nav .phone-app-nav-item {
+  flex: 0 0 auto;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.phone.is-flipped .is-fold-span .chirp-app:has(> .phone-app-nav) > .phone-app-nav .phone-app-nav-item span {
+  font-size: 15px;
+}
+
+.phone.is-flipped .is-fold-span .chirp-app:has(> .phone-app-nav) > .chirp-content {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  min-height: 0;
+}
+
+.phone.is-flipped .home-screen .app-grid {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}

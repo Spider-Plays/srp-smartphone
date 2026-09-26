@@ -1,0 +1,17 @@
+/* Spider RP — shared UI tokens (sr-hud / ox_lib) */
+
+:root {
+  --spider-accent: #7ee8ca;
+  --spider-accent-rgb: 126, 232, 202;
+  --spider-accent-strong: #5cd9b8;
+  --spider-accent-soft: rgba(126, 232, 202, 0.22);
+  --spider-accent-muted: rgba(126, 232, 202, 0.18);
+  --spider-accent-border: rgba(126, 232, 202, 0.35);
+  --spider-panel: rgba(6, 9, 16, 0.88);
+  --spider-panel-2: rgba(10, 15, 24, 0.94);
+  --spider-border: rgba(255, 255, 255, 0.07);
+  --spider-text: #d9d9d9;
+  --spider-muted: #7a87a4;
+  --spider-gradient: linear-gradient(135deg, #7ee8ca, #5cd9b8);
+  --spider-gradient-deep: linear-gradient(135deg, #7ee8ca, #4eb89a);
+}

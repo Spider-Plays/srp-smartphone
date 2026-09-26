@@ -1,0 +1,219 @@
+/**
+ * Seamless status bar + app header blend (Notes-style).
+ * Phone-screen carries the tint; app shells and headers stay transparent.
+ */
+
+.phone-screen.app-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(96, 165, 250, 0.1) 0%,
+    rgba(5, 10, 18, 0.42) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+  background-color: var(--app-bg, #050a12) !important;
+  background-image: var(--app-chrome-gradient) !important;
+}
+
+/* App shells — show phone-screen gradient through status bar region */
+.phone-screen.app-mode .phone-app,
+.phone-screen.app-mode .cyber-settings,
+.phone-screen.app-mode .news-app,
+.phone-screen.app-mode .mail-app,
+.phone-screen.app-mode .chirp-app,
+.phone-screen.app-mode .lifeinvader-app,
+.phone-screen.app-mode .contacts-app.phone-app,
+.phone-screen.app-mode .edit-contact,
+.phone-screen.app-mode .weather-app {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Headers merge with status bar (no separate strip) */
+.phone-screen.app-mode .phone-app-header,
+.phone-screen.app-mode .cyber-settings-header,
+.phone-screen.app-mode .emergency-header,
+.phone-screen.app-mode .mail-app .phone-app-header,
+.phone-screen.app-mode .news-app .news-header,
+.phone-screen.app-mode .news-app .news-compose-header,
+.phone-screen.app-mode .chirp-header {
+  background: transparent !important;
+  padding-top: 2px;
+}
+
+.phone-screen.app-mode .news-app .news-header {
+  border-bottom: none;
+}
+
+.phone-screen.app-mode .phone-app-header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.phone-screen.app-mode.emergency-mode .phone-app.emergency-app .phone-app-header {
+  border-bottom: none;
+}
+
+/* Per-app screen tints (match each app’s palette) */
+.phone-screen.app-mode.settings-mode,
+.phone-screen.app-mode.settings-mode .cyber-settings {
+  --app-bg: #0a0c12;
+}
+
+.phone-screen.app-mode.messages-mode,
+.phone-screen.app-mode.chat-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(52, 199, 89, 0.12) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.phone-mode,
+.phone-screen.app-mode.contacts-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(10, 132, 255, 0.14) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.bank-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(0, 212, 170, 0.12) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.mail-mode {
+  --app-bg: #0c1628;
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(10, 132, 255, 0.18) 0%,
+    rgba(12, 22, 40, 0.55) 40%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.chirp-mode {
+  --app-bg: #000;
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(29, 155, 240, 0.1) 0%,
+    rgba(0, 0, 0, 0.35) 42%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.market-mode {
+  --app-bg: #0d0d0f;
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(255, 69, 58, 0.12) 0%,
+    rgba(13, 13, 15, 0.5) 40%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.maps-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(48, 176, 199, 0.14) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.weather-mode {
+  --app-bg: #060b14;
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(56, 189, 248, 0.18) 0%,
+    rgba(30, 58, 138, 0.38) 34%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.loans-mode {
+  --app-bg: #06100c;
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(52, 199, 89, 0.16) 0%,
+    rgba(10, 40, 24, 0.38) 34%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode .loans-app {
+  background: transparent !important;
+}
+
+.phone-screen.app-mode.jobs-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(88, 86, 214, 0.14) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.services-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(255, 159, 10, 0.14) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.trading-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(247, 147, 26, 0.12) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.documents-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(59, 130, 246, 0.14) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.invoices-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(172, 142, 104, 0.14) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.gallery-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(255, 45, 85, 0.1) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+.phone-screen.app-mode.garage-mode,
+.phone-screen.app-mode.vehicle-detail-mode {
+  --app-chrome-gradient: linear-gradient(
+    165deg,
+    rgba(255, 149, 0, 0.12) 0%,
+    rgba(5, 10, 18, 0.4) 38%,
+    rgba(0, 0, 0, 0) 58%
+  );
+}
+
+/* Call gradients — call.css (phone-screen, includes status bar region) */
+
+/* Notes / calculator / news / emergency keep dedicated rules in their CSS files */

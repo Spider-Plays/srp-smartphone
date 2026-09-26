@@ -1,0 +1,541 @@
+/* Wallet (Documents tab) */
+.wallet-tab { padding-bottom: 12px; }
+
+.wallet-card-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.wallet-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 12px;
+}
+
+.wallet-chip.active {
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.wallet-chip.invalid { opacity: 0.55; }
+
+.wallet-id-card {
+  border-radius: 18px;
+  padding: 16px;
+  color: #fff;
+  background: linear-gradient(145deg, #1e3a5f 0%, #2563eb 55%, #1d4ed8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.wallet-id-card.revoked {
+  background: linear-gradient(145deg, #374151 0%, #4b5563 100%);
+  filter: grayscale(0.35);
+}
+
+.wallet-id-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.wallet-id-state {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.wallet-id-header h3 { margin: 2px 0 0; font-size: 16px; }
+
+.wallet-id-status {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.wallet-id-status.ok { color: #86efac; }
+.wallet-id-status.bad { color: #fca5a5; }
+
+.wallet-id-photo {
+  width: 72px;
+  height: 88px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.wallet-id-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  margin: 0;
+}
+
+.wallet-id-fields dt {
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin: 0;
+}
+
+.wallet-id-fields dd {
+  margin: 2px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* MDT / EMS */
+.mdt-officer-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 14px;
+}
+
+.mdt-officer-card.ems { border-color: rgba(239, 68, 68, 0.25); }
+
+.mdt-search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mdt-search-row .doc-search { flex: 1; margin: 0; }
+
+.mdt-search-btn {
+  width: 44px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(88, 86, 214, 0.85);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mdt-result-card,
+.mdt-bolo-card {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 10px;
+}
+
+.mdt-bolo-plate {
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+/* Boss */
+.boss-balance-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1f2937, #374151);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 14px;
+}
+
+.boss-employee-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 8px;
+}
+
+.boss-employee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.boss-employee-info span { font-size: 12px; opacity: 0.65; }
+
+.boss-duty-pill {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 4px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.boss-duty-pill.on {
+  background: rgba(52, 199, 89, 0.2);
+  color: #86efac;
+}
+
+/* Real estate browse */
+.realestate-card {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 10px;
+}
+
+.realestate-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.realestate-card-top h3 { margin: 0; font-size: 15px; }
+
+.realestate-price {
+  font-weight: 700;
+  color: #86efac;
+  white-space: nowrap;
+}
+
+.realestate-address {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  opacity: 0.75;
+  margin: 6px 0 4px;
+}
+
+/* Dark web */
+.darkweb-app .phone-app-content { background: #0d0d12; }
+
+.darkweb-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.darkweb-cats button {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+}
+
+.darkweb-cats button.active {
+  background: rgba(147, 51, 234, 0.35);
+  border-color: rgba(147, 51, 234, 0.6);
+  color: #fff;
+}
+
+.darkweb-listing {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(147, 51, 234, 0.15);
+  margin-bottom: 10px;
+}
+
+.darkweb-listing-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.darkweb-listing-top h3 { margin: 0; font-size: 14px; }
+
+.darkweb-compose { display: flex; flex-direction: column; gap: 10px; }
+
+.darkweb-textarea {
+  width: 100%;
+  min-height: 72px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.darkweb-compose-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.notes-empty-btn.primary {
+  background: rgba(88, 86, 214, 0.85);
+  color: #fff;
+}
+
+.darkweb-delete {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 4px;
+}
+
+/* Calendar */
+.calendar-event {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #ff6b6b;
+  margin-bottom: 10px;
+}
+
+.calendar-event.server { border-left-color: #7ee8ca; }
+
+.calendar-event-date {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.calendar-event-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-event h3 { margin: 0 0 4px; font-size: 14px; }
+
+.calendar-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+/* Radio */
+.radio-stop-btn {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(233, 30, 99, 0.25);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.radio-station-card {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.radio-station-card.playing {
+  border-color: rgba(233, 30, 99, 0.45);
+  background: rgba(233, 30, 99, 0.12);
+}
+
+.radio-station-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-station-body h3 { margin: 0; font-size: 14px; }
+.radio-station-body p { margin: 2px 0 0; font-size: 12px; opacity: 0.65; }
+
+/* App Store */
+.appstore-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 10px;
+}
+
+.appstore-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  overflow: hidden;
+}
+
+.appstore-card-icon .app-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.appstore-card-body { flex: 1; min-width: 0; }
+.appstore-card-body h3 { margin: 0; font-size: 14px; }
+.appstore-card-body p { margin: 4px 0 0; font-size: 12px; opacity: 0.7; }
+
+.appstore-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 122, 255, 0.85);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.appstore-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.appstore-btn.remove { background: rgba(239, 68, 68, 0.75); }
+
+.appstore-btn--installing {
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  animation: appstore-btn-morph 0.2s ease forwards;
+}
+
+@keyframes appstore-btn-morph {
+  from {
+    transform: scale(0.88);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.appstore-btn--complete {
+  background: rgba(52, 199, 89, 0.22);
+  animation: appstore-install-pop 0.35s ease;
+}
+
+.appstore-btn--complete .appstore-progress-fill {
+  stroke: #34c759;
+}
+
+.appstore-btn--complete .appstore-btn-center {
+  color: #34c759;
+}
+
+@keyframes appstore-install-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.appstore-progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.appstore-progress-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 3;
+}
+
+.appstore-progress-fill {
+  fill: none;
+  stroke: #7ee8ca;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+/* CSS-driven ring — keeps animating even when NUI fetch blocks the JS thread */
+.appstore-btn--ring-active .appstore-progress-fill {
+  animation: appstore-ring-install 2.2s cubic-bezier(0.33, 0.12, 0.18, 1) forwards;
+}
+
+@keyframes appstore-ring-install {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.appstore-btn-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.appstore-btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: appstore-spin 0.7s linear infinite;
+}
+
+@keyframes appstore-spin {
+  to { transform: rotate(360deg); }
+}
+
+.appstore-card--installing {
+  opacity: 0.92;
+}
+
+.appstore-installed {
+  font-size: 11px;
+  color: #86efac;
+  font-weight: 600;
+}

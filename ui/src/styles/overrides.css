@@ -1,0 +1,339 @@
+/* FiveM NUI overrides — keep game background visible through spider.css */
+html,
+body,
+#root {
+  background: transparent !important;
+}
+
+.phone-container {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.phone-container .phone-scale-wrapper,
+.phone-container .phone {
+  pointer-events: all;
+}
+
+/* Neutral frame — override spider.css light rim / halo on the left edge */
+.phone-container .phone-frame {
+  background: linear-gradient(180deg, #1c1c20 0%, #0a0a0c 48%, #101014 100%) !important;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.65),
+    0 24px 56px rgba(0, 0, 0, 0.5) !important;
+}
+
+.phone-container input,
+.phone-container textarea,
+.phone-container [contenteditable='true'] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* App screens must fill the content area (router / AnimatePresence wrappers included) */
+.screen-content {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.screen-content .home-screen {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-content > *,
+.screen-content .screen-layer,
+.screen-content .screen-layer--home {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-layer .phone-app {
+  flex: 1;
+  min-height: 0;
+}
+
+.app-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* iPhone-style home bar — visible in all apps */
+.home-indicator.go-home {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.home-indicator.go-home:hover {
+  background: #ffffffd9;
+  box-shadow: 0 0 20px #ffffff80;
+}
+
+.home-indicator.go-home:active {
+  background: #fff;
+  transform: translate(-50%) scale(0.95);
+  box-shadow: 0 0 30px #fffc;
+}
+
+.settings-app .settings-content {
+  padding-bottom: 28px;
+}
+
+.settings-app .settings-item-scale {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.settings-app .settings-item-scale .item-content-scale {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.settings-app .scale-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.settings-app .scale-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* Phone size slider — iOS-style range (not default browser chrome) */
+.settings-app .phone-scale-slider-wrap {
+  --scale-track: rgba(255, 255, 255, 0.18);
+  --scale-fill: var(--phone-accent);
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 2px;
+  box-sizing: border-box;
+}
+
+.settings-app .phone-scale-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.settings-app .phone-scale-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.4),
+    0 0 0 3px rgba(74, 222, 128, 0.45);
+}
+
+/* WebKit — track + fill */
+.settings-app .phone-scale-slider::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--scale-fill) 0%,
+    var(--scale-fill) var(--scale-progress, 50%),
+    var(--scale-track) var(--scale-progress, 50%),
+    var(--scale-track) 100%
+  );
+}
+
+.settings-app .phone-scale-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -8.5px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.35),
+    0 0 0 0.5px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+.settings-app .phone-scale-slider:active::-webkit-slider-thumb {
+  transform: scale(1.08);
+}
+
+/* Firefox */
+.settings-app .phone-scale-slider::-moz-range-track {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--scale-track);
+  border: none;
+}
+
+.settings-app .phone-scale-slider::-moz-range-progress {
+  height: 5px;
+  border-radius: 999px 0 0 999px;
+  background: var(--scale-fill);
+}
+
+.settings-app .phone-scale-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.settings-app .phone-scale-slider::-moz-focus-outer {
+  border: 0;
+}
+
+/* Phone dialer — legacy selectors (AppScreen shell uses .phone-keypad-view above) */
+.contacts-app .keypad-container {
+  min-height: 0;
+  flex: 1;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.contacts-app .dial-display {
+  margin-bottom: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.contacts-app .dial-input {
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 22px;
+}
+
+.contacts-app .keypad-grid {
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+  margin-bottom: 0;
+  align-content: center;
+}
+
+.contacts-app .keypad-button {
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 68px;
+  max-height: 68px;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+.contacts-app .keypad-actions {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-bottom: 8px;
+}
+
+.contacts-app .keypad-action-btn {
+  width: 56px;
+  height: 56px;
+}
+
+/* Wallpaper + camera overrides */
+.phone-screen {
+  background-color: var(--app-bg, #050a12) !important;
+}
+
+/* App chrome gradient + transparent shells: app-blend.css */
+
+/* App chrome — status bar in normal flow above screen-content */
+.phone-screen.app-mode .status-bar,
+.phone-screen.app-mode .status-bar.app-open,
+.status-bar.theme-app,
+.status-bar.theme-app.app-open {
+  background: transparent !important;
+  flex-shrink: 0;
+}
+
+/* Camera — transparent status bar over live view */
+.phone-screen.camera-mode .status-bar,
+.phone-screen.camera-mode .status-bar.app-open,
+.status-bar.theme-camera,
+.status-bar.theme-camera.app-open {
+  background: transparent !important;
+}
+
+.phone-screen.emergency-mode {
+  background-color: #050a12 !important;
+  background-image: none !important;
+}
+
+.gallery-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 48px 20px;
+  font-size: 14px;
+}
+
+/* New apps — force readable text (list rows used .phone-card-body outside .phone-card) */
+.phone-app,
+.phone-app .phone-card-body,
+.phone-app .phone-list-item {
+  color: #fff;
+}
+
+/* Garage vehicle detail — track button (overrides Chirp .action-btn cascade) */
+.vehicle-detail-view > .action-btn {
+  margin-top: 8px;
+  height: 45px;
+}
+
+/* Chirp post actions — must not inherit garage/form .action-btn (green full-width) */
+.chirp-app .post-actions .chirp-action-btn,
+.chirp-app .post-actions-large .chirp-action-btn-large {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  margin-top: 0;
+  padding: 4px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  font-weight: 400;
+  pointer-events: auto;
+}
+
+.chirp-app .post-actions-large .chirp-action-btn-large {
+  padding: 8px;
+  border-radius: 50%;
+}
+
+/* Banner popups above notification tray overlays */
+.notification-container {
+  z-index: 10100 !important;
+}

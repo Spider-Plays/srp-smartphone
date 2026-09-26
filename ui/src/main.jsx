@@ -1,0 +1,38 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './styles/global.css'
+import './styles/spider.css'
+import './styles/overrides.css'
+import './styles/phone-frame.css'
+import './styles/app-shell.css'
+import './styles/app-blend.css'
+import './styles/call.css'
+import './styles/apps.css'
+import './styles/emergency.css'
+import './styles/invoices.css'
+import './styles/maps.css'
+import './styles/documents.css'
+import './styles/news.css'
+import './styles/calculator.css'
+import './styles/notes.css'
+import './styles/trading.css'
+import './styles/weather.css'
+import './styles/loans.css'
+import './styles/jobs.css'
+import './styles/lifeinvader.css'
+import './styles/mail.css'
+import './styles/media-picker.css'
+import './styles/services.css'
+import './styles/properties.css'
+import './styles/phone-scale.css'
+import './styles/fold.css'
+import './screens/HomeScreen.css'
+import './screens/settings/settings.css'
+import './styles/phone-apps-extra.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)

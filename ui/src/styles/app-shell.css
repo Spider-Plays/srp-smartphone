@@ -1,0 +1,936 @@
+/* Unified app shell — Emergency app design system for all phone apps */
+
+:root {
+  --app-bg: #050a12;
+  --app-surface: rgba(255, 255, 255, 0.04);
+  --app-border: rgba(255, 255, 255, 0.06);
+  --app-text-muted: rgba(255, 255, 255, 0.45);
+  --app-accent-line: var(--spider-accent);
+}
+
+/* Shell containers */
+.phone-app,
+.emergency-app,
+.bank-app,
+.trading-app,
+.messages-app,
+.settings-app,
+.garage-app,
+.properties-app,
+.contacts-app,
+.gallery-app,
+.chirp-app,
+.invoices-app,
+.jobs-app,
+.services-app,
+.maps-app,
+.weather-app,
+.notes-app,
+.edit-contact {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg);
+  color: #fff;
+  overflow: hidden;
+}
+
+.phone-screen.app-mode .phone-app,
+.phone-screen.app-mode .emergency-app,
+.phone-screen.app-mode .bank-app,
+.phone-screen.app-mode .trading-app,
+.phone-screen.app-mode .messages-app,
+.phone-screen.app-mode .settings-app,
+.phone-screen.app-mode .garage-app,
+.phone-screen.app-mode .properties-app,
+.phone-screen.app-mode .gallery-app,
+.phone-screen.app-mode .invoices-app,
+.phone-screen.app-mode .jobs-app,
+.phone-screen.app-mode .services-app,
+.phone-screen.app-mode .maps-app,
+.phone-screen.app-mode .weather-app,
+.phone-screen.app-mode .notes-app,
+.phone-screen.app-mode .documents-app {
+  background: transparent;
+  background-image: none;
+}
+
+/* Headers */
+.phone-app-header,
+.emergency-header,
+.bank-header,
+.trading-app .phone-app-header,
+.messages-header,
+.settings-header,
+.garage-header,
+.contacts-header,
+.gallery-header,
+.chirp-header,
+.edit-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px 20px 12px;
+  background: transparent;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.phone-app-header-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.emergency-header,
+.phone-app.emergency-app .phone-app-header {
+  flex-direction: column;
+  align-items: stretch;
+  border-bottom: none;
+  padding: 2px 20px 4px;
+}
+
+.phone-app-title,
+.emergency-title,
+.bank-title,
+.trading-app .phone-app-title,
+.messages-title,
+.settings-title,
+.garage-title,
+.contacts-title,
+.gallery-title,
+.chirp-title,
+.chirp-header h1,
+.edit-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin: 0;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.phone-app-subtitle,
+.emergency-subtitle,
+.messages-subtitle {
+  font-size: 14px;
+  color: var(--app-text-muted);
+  margin: 6px 0 0;
+}
+
+.phone-app-back,
+.bank-header .back-btn,
+.messages-header .back-btn,
+.settings-header .back-btn,
+.garage-header .back-btn,
+.contacts-header .back-btn,
+.gallery-header .back-btn,
+.edit-header .header-back,
+.chirp-header .back-btn,
+.chirp-header .search-btn,
+.chirp-header .new-post-btn,
+.chirp-header .logout-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.phone-app-back:active,
+.bank-header .back-btn:active,
+.messages-header .back-btn:active,
+.settings-header .back-btn:active,
+.garage-header .back-btn:active,
+.contacts-header .back-btn:active,
+.gallery-header .back-btn:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.phone-app-header-right,
+.gallery-header .confirm-btn,
+.contacts-header .save-btn {
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-top: 4px;
+}
+
+.chirp-header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-top: 4px;
+}
+
+.chirp-header .chirp-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.chirp-app .chirp-post {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+/* Scrollable content */
+.phone-app-content,
+.emergency-content,
+.bank-content,
+.settings-content,
+.garage-content,
+.messages-app .conversations-list,
+.messages-content,
+.chirp-content,
+.gallery-content,
+.contacts-app .contacts-list,
+.contacts-app .edit-contact-form,
+.edit-contact .edit-form {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 20px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.phone-app:has(.phone-app-nav) .phone-app-content,
+.emergency-app:has(.emergency-nav) .emergency-content {
+  padding-bottom: 8px;
+}
+
+/* Sub-tabs (top pill bar — same visual as bottom nav, text-only) */
+.phone-app-subtabs,
+.emergency-subtabs,
+.bank-tabs,
+.contacts-tabs,
+.chirp-tabs {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: 4px;
+  flex-shrink: 0;
+  margin: 0 14px 12px;
+  padding: 6px;
+  border-bottom: none;
+  background: var(--app-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+.phone-app-subtab,
+.emergency-subtab,
+.bank-tabs .tab-btn,
+.contacts-tabs .tab-btn,
+.chirp-tabs .tab-btn,
+.phone-app-tabs .tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: none;
+  color: var(--app-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  font-family: inherit;
+  text-align: center;
+  transition: color 0.15s, border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.phone-app-subtab.active,
+.emergency-subtab.active,
+.bank-tabs .tab-btn.active,
+.contacts-tabs .tab-btn.active,
+.chirp-tabs .tab-btn.active,
+.phone-app-tabs .tab-btn.active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+.phone-app-subtab.active::after,
+.emergency-subtab.active::after,
+.bank-tabs .tab-btn.active::after,
+.contacts-tabs .tab-btn.active::after,
+.chirp-tabs .tab-btn.active::after,
+.phone-app-tabs .tab-btn.active::after {
+  display: none;
+}
+
+/* Bottom nav */
+.phone-app-nav,
+.emergency-nav {
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  margin: 0 14px 6px;
+  padding: 8px 6px;
+  background: var(--app-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+.phone-app-nav-item,
+.emergency-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 4px;
+  border: none;
+  background: none;
+  color: var(--app-text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 14px;
+  transition: color 0.15s;
+}
+
+.phone-app-nav-item span,
+.emergency-nav-item span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.phone-app-nav-item.active,
+.emergency-nav-item.active {
+  color: #fff;
+}
+
+.phone-app-nav-icon-wrap,
+.emergency-nav-icon-wrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.phone-app-nav-item.active .phone-app-nav-icon-wrap,
+.emergency-nav-item.active .emergency-nav-icon-wrap {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
+}
+
+.phone-app-nav-text-fallback {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+/* Section labels */
+.phone-section-label,
+.emergency-section-label,
+.settings-app .section-header h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0 0 10px;
+}
+
+.phone-section-label + .phone-section-label,
+.emergency-section-label + .emergency-section-label,
+.emergency-section-spacer {
+  margin-top: 22px;
+}
+
+.settings-app .section-header {
+  margin-bottom: 0;
+}
+
+.settings-app .settings-section {
+  margin-bottom: 22px;
+}
+
+/* Cards & list rows */
+.phone-card,
+.phone-list-item,
+.settings-app .settings-item,
+.conversation-item,
+.garage-app .vehicle-item,
+.bank-app .transaction-item,
+.trading-app .phone-list-item,
+.trading-line-card,
+.emergency-line-card,
+.invoice-line-card,
+.invoice-form-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+}
+
+.phone-card,
+.phone-list-item {
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.settings-app .settings-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: default;
+}
+
+.settings-app .settings-item.toggle-item {
+  cursor: pointer;
+}
+
+.settings-app .settings-item.toggle-item:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.settings-app .item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.settings-app .item-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.settings-app .item-value,
+.settings-app .item-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+}
+
+/* Conversation / lawyer-style rows */
+.conversation-item,
+.emergency-lawyer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--app-border);
+  margin-bottom: 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.conversation-item:last-child,
+.emergency-lawyer-item:last-child {
+  border-bottom: none;
+}
+
+.conversation-avatar,
+.emergency-lawyer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.conversation-name,
+.emergency-lawyer-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.conversation-last-message,
+.conversation-time,
+.emergency-lawyer-phone {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Empty states */
+.phone-empty,
+.emergency-empty,
+.no-messages,
+.empty-state,
+.garage-app .empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--app-text-muted);
+  font-size: 14px;
+}
+
+.phone-empty svg,
+.empty-state svg,
+.no-messages svg {
+  opacity: 0.35;
+  margin-bottom: 12px;
+}
+
+.emergency-empty-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+/* Phone app — keypad & contacts inside unified shell */
+.phone-app-shell .contacts-search {
+  margin-bottom: 12px;
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
+}
+
+.phone-app-shell .contacts-search .search-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.phone-app-shell .contacts-search .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.phone-app-shell .add-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  background: var(--app-surface);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.phone-app-shell .add-contact-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.phone-app-shell .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.phone-app-shell .contact-item:last-child {
+  border-bottom: none;
+}
+
+.phone-app-shell .contact-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.phone-app-shell .contact-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.phone-app-shell .contact-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.phone-app-shell .contact-phone,
+.phone-app-shell .contact-note {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+}
+
+.phone-app-shell .contact-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.phone-app-shell .contact-action-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-app-shell .contact-action-btn:active {
+  color: #fff;
+}
+
+.phone-app-shell .no-contacts {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--app-text-muted);
+}
+
+.phone-app-shell .keypad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+}
+
+/* Keypad tab — fill space between header and bottom nav (no scroll) */
+.phone-app-shell.phone-keypad-view .phone-app-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 8px 20px 4px;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-container {
+  flex: 1;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.phone-app-shell.phone-keypad-view .dial-display {
+  width: 100%;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.phone-app-shell.phone-keypad-view .dial-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.12em;
+  outline: none;
+  min-height: 48px;
+  font-family: inherit;
+}
+
+.phone-app-shell.phone-keypad-view .dial-input::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+  letter-spacing: 0;
+  font-size: 16px;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  align-content: center;
+  min-height: 0;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-button {
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 72px;
+  max-height: 72px;
+  margin: 0 auto;
+  border: 1px solid var(--app-border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-button:active {
+  background: rgba(255, 255, 255, 0.14);
+  transform: scale(0.95);
+}
+
+.phone-app-shell.phone-keypad-view .keypad-actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 4px 0 8px;
+  margin-top: 0;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.1s, opacity 0.15s;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn.delete {
+  background: rgba(244, 67, 54, 0.25);
+  border: 1px solid rgba(244, 67, 54, 0.35);
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn.delete:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn.delete:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn.call {
+  background: #34c759;
+  box-shadow: 0 4px 14px rgba(52, 199, 89, 0.35);
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn.call:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.phone-app-shell.phone-keypad-view .keypad-action-btn.call:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.phone-app-shell .call-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--app-border);
+  cursor: pointer;
+}
+
+.phone-app-shell .call-item:last-child {
+  border-bottom: none;
+}
+
+/* Hide legacy tab bars that duplicate phone-app-subtabs */
+.phone-app-tabs {
+  display: none;
+}
+
+/* Chat header layout */
+.messages-header .messages-contact-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.messages-contact-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.messages-header .messages-title {
+  font-size: 18px;
+}
+
+.messages-header .messages-subtitle {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.conversation-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.conversation-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.conversation-last-message {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unread-badge {
+  flex-shrink: 0;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bank cards on navy shell */
+.bank-app .balance-card,
+.bank-app .action-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+}
+
+.bank-app .transaction-item,
+.bank-app .transaction-item-mini {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+}
+
+.garage-app .vehicle-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.garage-app .detail-info-card,
+.garage-app .track-status-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.properties-app .properties-sections {
+  gap: 20px;
+}
+
+.properties-app .properties-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.properties-app .properties-section + .properties-section {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--app-border);
+}
+
+.properties-app .properties-section-empty {
+  padding: 18px 14px;
+  border-radius: 14px;
+  background: var(--app-surface);
+  border: 1px dashed var(--app-border);
+  color: var(--app-text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Chat — input pinned below scroll area */
+.chat-app .phone-app-content {
+  padding-bottom: 8px;
+}
+
+.chat-app .messages-input-container {
+  flex-shrink: 0;
+  padding: 10px 16px 12px;
+  background: var(--app-bg);
+  border-top: 1px solid var(--app-border);
+}
+
+.phone-app-footer {
+  flex-shrink: 0;
+}

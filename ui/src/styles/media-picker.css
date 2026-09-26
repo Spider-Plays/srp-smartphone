@@ -1,0 +1,208 @@
+/* Shared gallery/URL image picker (ChirpMediaPicker) — portaled to .phone-screen, not inside .chirp-app */
+
+.chirp-media-picker-overlay {
+  --chirp-bg: #0c1628;
+  --chirp-surface: #1a2332;
+  --chirp-border: rgba(255, 255, 255, 0.12);
+  --chirp-text: #f0f4f8;
+  --chirp-muted: rgba(255, 255, 255, 0.55);
+  --chirp-blue: #7ee8ca;
+
+  position: absolute;
+  inset: 0;
+  z-index: 250;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: auto;
+  font-family: 'Saira', system-ui, sans-serif;
+}
+
+.chirp-media-picker-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  touch-action: none;
+  cursor: pointer;
+}
+
+.chirp-media-picker {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-height: 72%;
+  background: var(--chirp-bg);
+  color: var(--chirp-text);
+  border-top: 1px solid var(--chirp-border);
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chirp-media-picker-tabs,
+.chirp-media-picker-header {
+  flex-shrink: 0;
+}
+
+.chirp-media-picker-gallery,
+.chirp-media-picker-url {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chirp-media-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--chirp-border);
+  background: var(--chirp-bg);
+}
+
+.chirp-media-picker-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--chirp-text);
+}
+
+.chirp-media-picker-overlay .chirp-x-icon-btn {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--chirp-text);
+  cursor: pointer;
+}
+
+.chirp-media-picker-overlay .chirp-x-icon-btn:active {
+  transform: scale(0.94);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.chirp-media-picker-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--chirp-border);
+  background: var(--chirp-bg);
+}
+
+.chirp-media-picker-tabs button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--chirp-muted);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.chirp-media-picker-tabs button.active {
+  color: var(--chirp-text);
+  box-shadow: inset 0 -2px 0 var(--chirp-blue);
+}
+
+.chirp-media-picker-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 2px;
+  background: #000;
+}
+
+.chirp-media-picker-photo {
+  aspect-ratio: 1;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--chirp-surface);
+}
+
+.chirp-media-picker-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chirp-media-picker-url {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--chirp-bg);
+}
+
+.chirp-media-picker-url label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--chirp-text);
+}
+
+.chirp-media-picker-url input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--chirp-border);
+  background: var(--chirp-surface);
+  color: var(--chirp-text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.chirp-media-picker-url input::placeholder {
+  color: var(--chirp-muted);
+}
+
+.chirp-media-picker-hint,
+.chirp-media-picker-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--chirp-muted);
+  text-align: center;
+  padding: 16px 12px;
+}
+
+.chirp-media-picker-error {
+  margin: 0;
+  font-size: 13px;
+  color: #ff6b6b;
+}
+
+.chirp-media-picker-overlay .chirp-auth-primary {
+  margin-top: 8px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--chirp-blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.chirp-media-picker-overlay .chirp-auth-primary:active {
+  opacity: 0.9;
+}

@@ -1,0 +1,107 @@
+.garage-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.garage-header .count {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.vehicle-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 12px 10px;
+  padding: 14px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.vehicle-card:active {
+  background: var(--surface-2);
+}
+
+.vehicle-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.plate-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chev {
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.vehicle-detail {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.vehicle-detail-icon {
+  width: 80px;
+  height: 80px;
+  color: var(--text-dim);
+  margin: 24px 0;
+}
+
+.detail-card {
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.detail-card.status {
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-row:last-child {
+  border-bottom: none;
+}
+.detail-row span:first-child {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.detail-row strong {
+  font-size: 14px;
+}
+.detail-row .status-parked {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.detail-row .plate-pill {
+  background: var(--surface-2);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}

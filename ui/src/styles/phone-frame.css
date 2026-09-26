@@ -1,0 +1,142 @@
+/* Physical phone frame — visible bezels, metallic rim, recessed glass */
+
+.phone {
+  filter:
+    drop-shadow(0 22px 48px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+}
+
+.phone-hinge {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  z-index: 12;
+  width: 92px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 0 0 5px 5px;
+  pointer-events: none;
+  background: linear-gradient(180deg, #3a3a42 0%, #141418 42%, #2a2a30 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.55);
+}
+
+.phone-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: var(--frame-bezel, 3.5px) !important;
+  display: flex;
+  border-radius: var(--frame-radius-outer, 10px) !important;
+  isolation: isolate;
+  /* Outer rim — neutral dark metal, no left-edge white wash */
+  background: linear-gradient(180deg, #1c1c20 0%, #0a0a0c 48%, #101014 100%);
+  border: var(--frame-rim, 3px) solid #2a2a30;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.65),
+    0 24px 56px rgba(0, 0, 0, 0.5);
+}
+
+.phone-frame::before,
+.phone-frame::after,
+.phone-frame-shine {
+  display: none !important;
+}
+
+.frame-earpiece {
+  position: absolute;
+  top: calc(var(--frame-bezel, 3.5px) + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 4px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #1a1a1e 0%, #050506 100%);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.9),
+    0 1px 0 rgba(255, 255, 255, 0.06);
+  z-index: 6;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.phone-screen {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--frame-radius-inner, 8px) !important;
+  /* Screen sits inside bezel — slight recess */
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.95),
+    inset 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* Side controls — sit on frame edge */
+.volume-buttons {
+  left: -7px;
+  top: 148px;
+  gap: 14px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.phone:hover .volume-buttons,
+.volume-buttons:focus-within {
+  opacity: 1;
+}
+
+.volume-button {
+  width: 5px;
+  min-height: 68px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0c0c0e, #242428, #141416);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.volume-button:hover {
+  background: linear-gradient(90deg, #1a1a1e, #48484f, #2a2a30);
+}
+
+.volume-button:active {
+  background: #08080a;
+}
+
+.lock-button {
+  width: 5px;
+  height: 84px;
+  top: 188px;
+  right: -7px;
+  border-radius: 3px;
+  opacity: 0.5;
+  background: linear-gradient(270deg, #0c0c0e, #242428, #141416);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.phone:hover .lock-button,
+.lock-button:focus-visible {
+  opacity: 1;
+}
+
+.lock-button:hover {
+  background: linear-gradient(270deg, #1a1a1e, #48484f, #2a2a30);
+}
+
+.lock-button:active {
+  background: #08080a;
+}
+
+.action-button,
+.dynamic-island,
+.phone-frame-edge {
+  display: none !important;
+}

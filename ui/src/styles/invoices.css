@@ -1,0 +1,246 @@
+/* Invoices app — extends app-shell / emergency design system */
+
+.invoice-line-card {
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.invoice-line-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.invoice-line-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.invoice-line-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.invoice-line-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.invoice-line-amount {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.invoice-line-party {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
+}
+
+.invoice-line-note {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.invoice-line-time {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.38);
+  margin-top: 6px;
+}
+
+.invoice-status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.invoice-status.pending {
+  color: #ff9f0a;
+  background: rgba(255, 149, 0, 0.15);
+}
+
+.invoice-status.paid {
+  color: #34c759;
+  background: rgba(52, 199, 89, 0.15);
+}
+
+.invoice-status.declined {
+  color: #ff453a;
+  background: rgba(255, 69, 58, 0.15);
+}
+
+.invoice-line-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.invoice-pay-btn,
+.invoice-decline-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.invoice-pay-btn {
+  background: rgba(52, 199, 89, 0.2);
+  color: #34c759;
+}
+
+.invoice-decline-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.invoice-pay-btn:active,
+.invoice-decline-btn:active {
+  transform: scale(0.97);
+  filter: brightness(1.12);
+}
+
+.invoice-form-card {
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.invoice-field {
+  padding: 0 16px;
+}
+
+.invoice-field:first-of-type {
+  padding-top: 14px;
+}
+
+.invoice-field + .invoice-field {
+  margin-top: 12px;
+}
+
+.invoice-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  margin-bottom: 6px;
+}
+
+.invoice-field-input {
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+}
+
+.invoice-field-input:last-child {
+  border-bottom: none;
+}
+
+.invoice-field-input::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.invoice-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.invoice-form-hint {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.invoice-send-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.invoice-send-btn:active:not(:disabled) {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.invoice-send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.invoice-empty-inline {
+  text-align: left;
+  padding: 8px 0 24px;
+}
+
+.invoice-empty-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  text-align: center;
+  color: var(--app-text-muted);
+  font-size: 14px;
+}
+
+.invoice-empty-center svg {
+  opacity: 0.35;
+  margin-bottom: 12px;
+}
